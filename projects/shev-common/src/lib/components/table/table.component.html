@@ -1,0 +1,14 @@
+<div>
+  <ng-container *ngTemplateOutlet="showChild"></ng-container>
+</div>
+<div *ngIf="judge?judge:checkBoxList.length>0">
+  <ng-container *ngTemplateOutlet="checkChild"></ng-container>
+</div>
+
+<st [widthMode]="{type: 'strict'}" #st [data]="data" [total]="total" [loading]="loading" [req]="{params: params}"
+  [res]="{process: ListChange}" [pi]="offset" [ps]="rows" [columns]="columns" (change)="change($event)"
+  [page]="pageConfig" [scroll]="{ x: '600px', y: total>10?'600px':false }">
+  <ng-template st-row="custom" let-item let-index="index">
+    <img *ngIf="item.topFlag" width="30px" [src]="setTop" /> {{item.title}}
+  </ng-template>
+</st>

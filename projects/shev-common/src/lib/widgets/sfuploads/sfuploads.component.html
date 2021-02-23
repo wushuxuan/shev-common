@@ -1,0 +1,54 @@
+<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+  <!-- <button *ngIf="i.cropper && fileList && fileList.length>0" type="button" (click)="CropperImg()"
+    nz-button>{{ 'menu.system.crop' | i18n }}</button> -->
+  <nz-upload *ngIf="update" [nzType]="i.type" [nzShowButton]="fileList ? (fileList.length < i.limitLength) :true"
+    [(nzFileList)]="fileList" [nzDisabled]="disabled" [nzAction]="i.action" [nzDirectory]="i.directory"
+    [nzOpenFileDialogOnClick]="i.openFileDialogOnClick" [nzAccept]="i.accept" [nzLimit]="i.limit" [nzFilter]="i.filter"
+    [nzSize]="i.size" [nzFileType]="i.fileType" [nzHeaders]="ui.headers" [nzData]="ui.data" [nzListType]="i.listType"
+    [nzMultiple]="i.multiple" [nzName]="i.name" [nzShowUploadList]="i.showUploadList"
+    [nzWithCredentials]="i.withCredentials" [nzBeforeUpload]="i.beforeUpload" [nzCustomRequest]="i.customRequest"
+    [nzRemove]="ui.remove || handleRemove" [nzPreview]="handlePreview" (nzChange)="change($event)">
+    <ng-container [ngSwitch]="btnType">
+      <ng-container *ngSwitchCase="'plus'">
+        <i nz-icon nzType="plus"></i>
+        <div class="ant-upload-text" [innerHTML]="i.text"></div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'drag'">
+        <p class="ant-upload-drag-icon"><i nz-icon nzType="inbox"></i></p>
+        <p class="ant-upload-text" [innerHTML]="i.text"></p>
+        <p class="ant-upload-hint" [innerHTML]="i.hint"></p>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <button type="button" nz-button>
+          <i nz-icon nzType="upload"></i><span [innerHTML]="i.text"></span>
+        </button>
+      </ng-container>
+    </ng-container>
+  </nz-upload>
+</sf-item-wrap>
+
+
+
+<nz-modal [(nzVisible)]="cropperVisible" nzMaskClosable="false" [nzTitle]="'裁剪'"
+  [nzContent]="modalContent" [nzOkText]="'确定'" [nzCancelText]="'取消'"
+  [nzWrapClassName]="''" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-template #modalContent>
+    <button nz-button nzType="primary" (click)="CropperImg()"
+      style="margin-bottom:12px;">裁剪</button>
+    <div *ngIf="cropperUrl" class="ng-cropper-box" [ngClass]="{'circle':cropperType=='circle'?true:false }">
+      <!-- <div style="margin-bottom:12px;">
+        <a nz-button nzType="link" (click)="changeCircleCropper()">{{ 'menu.systems.crop.circle' | i18n }}</a>
+        <a nz-button nzType="link" (click)="changeSquareCropper()">{{ 'menu.systems.crop.square' | i18n }}</a>
+        <nz-radio-group *ngIf="cropperType=='square'" [(ngModel)]="_ratio" (ngModelChange)="changeCropperRatio()">
+          <label nz-radio-button nzValue="1">1:1</label>
+          <label nz-radio-button nzValue="2">4:3</label>
+          <label nz-radio-button nzValue="3">16:9</label>
+        </nz-radio-group>
+      </div> -->
+      <img id="image" [src]="cropperUrl" height="293" width="440" />
+    </div>
+    <div *ngIf="!cropperUrl">
+      <img [src]="imgUrl" class="img-fluid" style="min-width: 100%;" />
+    </div>
+  </ng-template>
+</nz-modal>

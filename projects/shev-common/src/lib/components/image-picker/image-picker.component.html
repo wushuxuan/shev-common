@@ -1,0 +1,75 @@
+<div class="clearfix" *ngIf="!drag">
+  <nz-upload nzListType="picture-card" [nzFileType]="type" [(nzFileList)]="fileList"
+    [nzShowButton]="fileList.length < total" [nzDisabled]="disabled" [nzPreview]="handlePreview"
+    [nzBeforeUpload]="beforeUpload" [nzRemove]="handleRemove" (nzChange)="handleChange($event)">
+    <i nz-icon nzType="plus"></i>
+    <div class="ant-upload-text">{{'menu.system.selectImageFile' | i18n}}</div>
+  </nz-upload>
+  <nz-modal [nzTitle]="'menu.system.content.detail' | i18n" [nzVisible]="previewVisible"
+    [nzContent]="content?content:modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+    <ng-template #modalContent>
+      <div *ngIf="!previewFile.type">
+        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+      </div>
+      <div *ngIf="previewFile.type && previewFile.type.split('/')[0]=='image'">
+        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+      </div>
+      <div *ngIf="previewFile.type && previewFile.type.split('/')[0] =='video'">
+        <video [src]="previewImage" [ngStyle]="{ width: '100%' }"
+          controls="controls">{{'menu.system.video.watch.warning' | i18n}}</video>
+      </div>
+      <div
+        *ngIf="previewFile.type && previewFile.type.split('/')[0] !='image' && previewFile.type.split('/')[0] !='video' ">
+        <p class="text-center">{{'menu.system.file.check.off' | i18n}}</p>
+      </div>
+    </ng-template>
+  </nz-modal>
+
+</div>
+
+
+<div class="clearfix" *ngIf="drag">
+  <shev-ngx-dnd-content style="display: inline-block" *ngIf="fileList.length>0" [data]="fileList"
+    [renderItem]="cardTemplate" (outer)="sortChange($event)">
+  </shev-ngx-dnd-content>
+  <ng-template #cardTemplate let-item>
+    <div style="position: relative">
+      <div style="float: left;width: 104px;height: 104px;
+      margin: 0 8px 8px 0;cursor: pointer;padding:6px;border:1px solid #d9d9d9;border-radius: 8px;">
+        <div style="width:100%;height:90px;overflow: hidden;" (click)="handlePreview(item)">
+          <img style="width:100%;" [src]="item.url" />
+        </div>
+        <span class="card-right-close" style="right: -5px;" (click)="delItem(item)"><i nz-icon nzType="minus-circle"
+            nzTheme="fill" style="font-size: 20px; color: #f00;"></i></span>
+      </div>
+    </div>
+  </ng-template>
+  <div style="display: inline-block;">
+    <nz-upload nzListType="picture-card" [nzFileType]="type" [nzShowButton]="fileList.length < total"
+      [nzDisabled]="disabled" [nzPreview]="handlePreview" [nzBeforeUpload]="beforeUpload" [nzRemove]="handleRemove"
+      (nzChange)="handleChange($event)">
+      <i nz-icon nzType="plus"></i>
+      <div class="ant-upload-text">{{'menu.system.selectImageFile' | i18n}}</div>
+    </nz-upload>
+  </div>
+  <nz-modal [nzTitle]="'menu.system.content.detail' | i18n" [nzVisible]="previewVisible"
+    [nzContent]="content?content:modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+    <ng-template #modalContent>
+      <div *ngIf="!previewFile.type">
+        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+      </div>
+      <div *ngIf="previewFile.type && previewFile.type.split('/')[0]=='image'">
+        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+      </div>
+      <div *ngIf="previewFile.type && previewFile.type.split('/')[0] =='video'">
+        <video [src]="previewImage" [ngStyle]="{ width: '100%' }"
+          controls="controls">{{'menu.system.video.watch.warning' | i18n}}</video>
+      </div>
+      <div
+        *ngIf="previewFile.type && previewFile.type.split('/')[0] !='image' && previewFile.type.split('/')[0] !='video' ">
+        <p class="text-center">{{'menu.system.file.check.off' | i18n}}</p>
+      </div>
+    </ng-template>
+  </nz-modal>
+
+</div>

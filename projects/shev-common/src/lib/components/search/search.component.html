@@ -1,0 +1,6 @@
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+  <input type="text" [(ngModel)]="name" nz-input [placeholder]="placeholder" />
+</nz-input-group>
+<ng-template #suffixIconButton>
+  <button nz-button nzType="primary" nzSearch (click)="search()"><i nz-icon nzType="search"></i></button>
+</ng-template>

@@ -1,0 +1,37 @@
+<div>
+  <shev-ngx-dnd-content [block]="true" *ngIf="list.length>0" [data]="list" [renderItem]="cardTemplate"
+    (outer)="dataChange($event)">
+  </shev-ngx-dnd-content>
+  <ng-template #cardTemplate let-item>
+    <div style="position: relative">
+
+      <div
+        style="border:1px solid #d9d9d9;align-items: center;border-radius: 8px;padding:8px;margin-bottom:8px;display: flex;flex-flow: row">
+        <div style="flex:1;margin:0px 12px;">
+          <nz-form-item style="margin-bottom:6px;margin-top:12px;">
+            <nz-form-control [nzSm]="24" [nzXs]="24">
+              <textarea nz-input [ngModel]="item.content"
+                [placeholder]="'menu.columns.task.form.list.placeholder' | i18n"
+                (ngModelChange)="setValue($event,list.indexOf(item))"
+                [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item style="margin-bottom:6px;margin-top:12px;">
+            <nz-form-control [nzSm]="24" [nzXs]="24">
+              <shev-image-picker [drag]="true" [value]="item.resourceList" [type]="imgPickerType"
+                (outer)="imgDataChange($event,list.indexOf(item))">
+              </shev-image-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <span class="card-right-close" (click)="deleteItem(list.indexOf(item))"><i nz-icon nzType="close-circle"
+            nzTheme="fill" style="font-size: 20px; color: #f00;"></i></span>
+      </div>
+
+    </div>
+  </ng-template>
+  <button style="width:100%;" (click)="add()" type="button" nz-button
+    nzType="dashed">{{ 'menu.button.add' | i18n }}</button>
+
+
+</div>

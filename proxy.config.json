@@ -1,0 +1,17 @@
+{
+    "/api": {
+      "target": "http://api.jxgy.tunnel.eduapps.cn",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    },
+    "/d30": {
+      "target": "http://d30.xcenable.com",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/d30": ""
+      }
+    }
+  }
+  

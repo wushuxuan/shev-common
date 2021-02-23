@@ -1,0 +1,30 @@
+<div
+  style="border-top:1px solid #ccc;padding-top:15px;padding-bottom:24px"
+  *ngIf="subAppModuleList && subAppModuleList.length > 0"
+>
+  <div style="display: flex; justify-content: space-between;">
+    <span style="font-weight: 600;">{{ 'menu.classspace.appset.child.module' | i18n }}</span>
+    <span style="font-weight: 600;padding-right:9px;">{{ 'menu.classspace.appset.enable' | i18n }}</span>
+  </div>
+  <div
+    *ngFor="let item of subAppModuleList; let key = index"
+    style="display: flex; justify-content: space-between; cursor: pointer;"
+  >
+    <span>{{ item.appModuleName }} &nbsp;<i (click)="rename(item, key)" nz-icon nzType="edit" nzTheme="fill"></i></span>
+    <span><nz-switch [(ngModel)]="item.status" (ngModelChange)="statusChange($event, item)"></nz-switch></span>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="nameVisible"
+  [nzTitle]="'menu.classspace.appset.menu.system.rename' | i18n"
+  [nzContent]="nameContent"
+  [nzWrapClassName]="''"
+  [nzOkDisabled]="!showName"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-template #nameContent>
+    <input nz-input [placeholder]="'menu.classspace.appset.menu.system.rename' | i18n" [(ngModel)]="showName" />
+  </ng-template>
+</nz-modal>

@@ -1,0 +1,183 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "shev-common": {
+      "projectType": "library",
+      "root": "projects/shev-common",
+      "sourceRoot": "projects/shev-common/src",
+      "prefix": "shev",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/shev-common/tsconfig.lib.json",
+            "project": "projects/shev-common/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/shev-common/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/shev-common/src/test.ts",
+            "tsConfig": "projects/shev-common/tsconfig.spec.json",
+            "karmaConfig": "projects/shev-common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/shev-common/tsconfig.lib.json",
+              "projects/shev-common/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "common-tester": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "root": "projects/common-tester",
+      "sourceRoot": "projects/common-tester/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/common-tester",
+            "index": "projects/common-tester/src/index.html",
+            "main": "projects/common-tester/src/main.ts",
+            "polyfills": "projects/common-tester/src/polyfills.ts",
+            "tsConfig": "projects/common-tester/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/common-tester/src/favicon.ico",
+              "projects/common-tester/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "projects/common-tester/src/styles.less"
+            ],
+            "scripts": [
+              "node_modules/ajv/dist/ajv.bundle.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common-tester/src/environments/environment.ts",
+                  "with": "projects/common-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "common-tester:build",
+            "proxyConfig": "proxy.config.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "common-tester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "common-tester:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/common-tester/src/test.ts",
+            "polyfills": "projects/common-tester/src/polyfills.ts",
+            "tsConfig": "projects/common-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/common-tester/karma.conf.js",
+            "assets": [
+              "projects/common-tester/src/favicon.ico",
+              "projects/common-tester/src/assets"
+            ],
+            "styles": [
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "projects/common-tester/src/styles.less"
+            ],
+            "scripts": [
+              "node_modules/ajv/dist/ajv.bundle.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/common-tester/tsconfig.app.json",
+              "projects/common-tester/tsconfig.spec.json",
+              "projects/common-tester/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/common-tester/e2e/protractor.conf.js",
+            "devServerTarget": "common-tester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "common-tester:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": false
+  },
+  "defaultProject": "shev-common"
+}

@@ -1,0 +1,9 @@
+<shev-card  [options]="options">
+    <div style="margin-bottom:12px">
+        <shev-search (outer)="search($event)" [placeholder]="'输入姓名过滤'">
+        </shev-search>
+      </div>
+      <shev-avatar *ngIf="teacherData.length" [showSrc]="true" [isShowDot]="false" [multiple]="true" [data]="teacherData"
+        [isCheck]="true" (outer)="avatarDataChange($event)">
+      </shev-avatar>
+</shev-card>

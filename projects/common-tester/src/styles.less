@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+//正常头像
+@primary-color: #1890ff;
+@success-color: #87d068;
+.primaryAvatar {
+    background-color: @primary-color;
+    margin-right: 0px;
+    margin-bottom: 12px;
+    margin-left: 12px;
+    cursor: pointer;
+  
+    :first-child {
+      margin-left: 0px;
+    }
+  
+    .ant-avatar-string {
+      position: unset;
+      left: 50%;
+      -webkit-transform-origin: 0 center;
+      transform-origin: 0 center;
+    }
+  }
+  
+  .checkedAvatar {
+    position: relative;
+    background-color: @success-color;
+    margin-right: 0px;
+    margin-bottom: 12px;
+    margin-left: 12px;
+    cursor: pointer;
+  
+    :first-child {
+      margin-left: 0px;
+    }
+  
+    .ant-avatar-string {
+      position: unset;
+      left: 50%;
+      -webkit-transform-origin: 0 center;
+      transform-origin: 0 center;
+    }
+  }
+  
+  
+  .checkedAvatarBox {
+    position: relative;
+  
+    .checkIcon {
+      position: absolute;
+      display: inline-block !important;
+      left: 30%;
+      top: 25%;
+      z-index: 20;
+    }
+  }
+  
+  .checkedAvatarBox:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    background: #fff;
+    opacity: 0.6;
+    height: 100%;
+    z-index: 9;
+  }
+  

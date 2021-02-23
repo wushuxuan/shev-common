@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/shev-common",
+  "lib": {
+    "entryFile": "src/index.ts"
+  },
+  "whitelistedNonPeerDependencies": [
+    "axios",
+    "js-sha1",
+    "cropperjs",
+    "@types/cropperjs",
+    "ngx-tinymce",
+    "ngx-sortablejs",
+    "ngx-quill",
+    "quill",
+    "sortablejs",
+    "tslib",
+    "angular",
+    "date-fns"
+  ]
+}

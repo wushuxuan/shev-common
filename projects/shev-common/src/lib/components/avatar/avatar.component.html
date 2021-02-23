@@ -1,0 +1,22 @@
+<ng-container>
+  <div *ngIf="!showSrc">
+    <nz-badge *ngFor="let item of data" [nzCount]="isShowDot && item.number">
+      <nz-avatar [nzShape]="type" [nzSize]="size" class="primaryAvatar"
+        [ngClass]="{'checkedAvatar': isCheck && item.checked}" nzText="{{item.name}}" (click)="onClick(item.userId)">
+      </nz-avatar>
+    </nz-badge>
+  </div>
+  <div *ngIf="showSrc">
+    <div *ngFor="let item of data" [ngStyle]="{'display': !item.isHidden?'inline-block':'none','margin':'0px 6px 6px'}">
+      <div [ngClass]="{'checkedAvatarBox': isCheck && item.checked}" (click)="onClick(item.userId)" style="text-align: center;">
+        <nz-avatar [ngClass]="{'choose': item.choose}" [nzShape]="type" [nzSize]="size" [nzSrc]="item.url">
+        </nz-avatar>
+        <i class="checkIcon" style="font-size: 30px;color:#149A63;display: none;" nz-icon nzType="check"
+          nzTheme="outline"></i>
+      </div>
+      <p style="text-align: center;margin-top:2px;">{{item.name}}</p>
+    </div>
+  </div>
+
+
+</ng-container>

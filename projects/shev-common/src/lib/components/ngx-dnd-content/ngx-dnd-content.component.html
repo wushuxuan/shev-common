@@ -1,0 +1,6 @@
+<div [sortablejs]="data" [sortablejsOptions]="options">
+  <div *ngFor="let item of data" [ngStyle]="{'display': block?'block':'inline-block'}">
+    <ng-template [ngTemplateOutlet]="renderItem" [ngTemplateOutletContext]="{ $implicit: item, index: index }">
+    </ng-template>
+  </div>
+</div>

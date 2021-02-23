@@ -1,0 +1,51 @@
+<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+  <ng-container [ngSwitch]="mode">
+
+    <nz-year-picker *ngSwitchCase="'year'" [nzDisabled]="disabled" [nzSize]="ui.size" [nzFormat]="displayFormat"
+      [(ngModel)]="displayValue" (ngModelChange)="_change($event)" [nzAllowClear]="i.allowClear"
+     [nzDisabledDate]="ui.disabledDate" [nzLocale]="ui.locale"
+      [nzPlaceHolder]="ui.placeholder" [nzPopupStyle]="ui.popupStyle" [nzDropdownClassName]="ui.dropdownClassName"
+      (nzOnOpenChange)="_openChange($event)" [nzRenderExtraFooter]="ui.renderExtraFooter"></nz-year-picker>
+
+    <nz-month-picker *ngSwitchCase="'month'" [nzDisabled]="disabled" [nzSize]="ui.size" [nzFormat]="displayFormat"
+      [(ngModel)]="displayValue" (ngModelChange)="_change($event)" [nzAllowClear]="i.allowClear"
+       [nzDisabledDate]="ui.disabledDate" [nzLocale]="ui.locale"
+      [nzPlaceHolder]="ui.placeholder" [nzPopupStyle]="ui.popupStyle" [nzDropdownClassName]="ui.dropdownClassName"
+      (nzOnOpenChange)="_openChange($event)" [nzRenderExtraFooter]="ui.renderExtraFooter"></nz-month-picker>
+
+    <nz-week-picker *ngSwitchCase="'week'" [nzDisabled]="disabled" [nzSize]="ui.size" [nzFormat]="displayFormat"
+      [(ngModel)]="displayValue" (ngModelChange)="_change($event)" [nzAllowClear]="i.allowClear"
+       [nzDisabledDate]="ui.disabledDate" [nzLocale]="ui.locale"
+      [nzPlaceHolder]="ui.placeholder" [nzPopupStyle]="ui.popupStyle" [nzDropdownClassName]="ui.dropdownClassName"
+      (nzOnOpenChange)="_openChange($event)"></nz-week-picker>
+
+    <div *ngSwitchCase="'rang'" style="display: flex;flex-flow: row">
+      <nz-date-picker [nzDisabled]="disabled" [nzDisabledDate]="disabledStartDate" [nzShowToday]="false"
+        [nzShowTime]="ui.showTime" [nzFormat]="displayFormat" [(ngModel)]="displayValue && displayValue[0]"
+        [nzPlaceHolder]="ui.placeholder"
+        (ngModelChange)="onStartChange($event)" (nzOnOpenChange)="handleStartOpenChange($event)">
+      </nz-date-picker><span style="height:32px;line-height: 32px;margin:0px 6px;"> ~ </span>
+      <nz-date-picker [nzDisabled]="disabled" [nzDisabledDate]="disabledEndDate" [nzShowToday]="false"
+        [nzShowTime]="ui.showTime" [nzFormat]="displayFormat" [(ngModel)]="displayValue && displayValue[1]"
+        [nzPlaceHolder]="ui.placeholder"
+        (ngModelChange)="onEndChange($event)" (nzOnOpenChange)="handleEndOpenChange($event)">
+      </nz-date-picker>
+    </div>
+    <!-- <nz-range-picker *ngSwitchCase="'range'" [nzDisabled]="disabled" [nzSize]="ui.size" [nzFormat]="displayFormat"
+      [(ngModel)]="displayValue" (ngModelChange)="_change($event)" [nzAllowClear]="i.allowClear"
+      [nzClassName]="ui.className" [nzDisabledDate]="ui.disabledDate" [nzLocale]="ui.locale"
+      [nzPlaceHolder]="ui.placeholder" [nzPopupStyle]="ui.popupStyle" [nzDropdownClassName]="ui.dropdownClassName"
+      (nzOnOpenChange)="_openChange($event)" [nzDisabledTime]="ui.disabledTime"
+      [nzRenderExtraFooter]="ui.renderExtraFooter" [nzRanges]="ui.ranges" [nzShowTime]="ui.showTime"
+      (nzOnOk)="_ok($event)"></nz-range-picker> -->
+
+    <nz-date-picker *ngSwitchDefault [nzDisabled]="disabled" [nzSize]="ui.size" [nzFormat]="displayFormat"
+      [(ngModel)]="displayValue" (ngModelChange)="_change($event)" [nzAllowClear]="i.allowClear"
+       [nzDisabledDate]="ui.disabledDate" [nzLocale]="ui.locale"
+      [nzPlaceHolder]="ui.placeholder" [nzPopupStyle]="ui.popupStyle" [nzDropdownClassName]="ui.dropdownClassName"
+      (nzOnOpenChange)="_openChange($event)" [nzDisabledTime]="ui.disabledTime"
+      [nzRenderExtraFooter]="ui.renderExtraFooter" [nzShowTime]="ui.showTime" [nzShowToday]="i.showToday"
+      (nzOnOk)="_ok($event)"></nz-date-picker>
+  </ng-container>
+
+</sf-item-wrap>
